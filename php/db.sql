@@ -29,6 +29,8 @@ CREATE TABLE `user_info` (
   `address2` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `email`, `password`, `mobile`,`address1`,`address2`) VALUES
+(1, 'Ravi Hitang', 'ravihitang@gmail.com', '5f4dcc3b5aa765d61d8327deb882cf99', 0, '8660549912');
 
-
-INSERT INTO `user_info` (`user_id`, `first_name`, `last_name`, `email`, `password`, `mobile`, `address1`, `address2`) VALUES;
+ $qry = "INSERT INTO `user_info` (`user_id`, `first_name`, `last_name`, `email`, `password`, `mobile`,`address1`,`address2`) VALUES
+ ('','',);";
