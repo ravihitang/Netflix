@@ -1,3 +1,31 @@
+<?php
+require_once "./php/connection.php";
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['SignUp']))
+{
+    $fname = $_POST['fName'];
+    $lname = $_POST['lName'];
+    $email = $_POST['email'];
+    $password = $_POST['pass'];
+    $confirm_password = $_POST['conf_pass'];
+    if($password==$confirm_password)
+    {
+            $pass= md5($password);
+            $psqry = "INSERT INTO `user_info` (`first_name`,`last_name`,`email`,`password`) VALUES ('$fname', '$lname','$email','$pass')";
+            $psrun = mysqli_query($con,$psqry);
+                        ?> <script>
+            alert('Registration Successfull!'); 
+            window.open('home-user.php','_self');
+            </script> <?php
+    }
+    else{
+            if($password!=$confirm_password){
+               ?> <script>
+                alert('Password does not match!')
+                </script> <?php
+            }
+    }
+  }
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -14,28 +42,21 @@
 <body>
     <div class="container">
         <header>
-            <img src="./assets/img/logo.png" alt="Logo">
+            <a href="./index.php"><img src="./assets/img/logo.png" alt="Logo"></a>
         </header>
 
         <div class="container-login">
             <h1>To enter</h1>
 
-            <form action="">
-
-                <input type="text" placeholder="Fisrt Name">
-                <input type="text" placeholder="Last Name">
-                <input type="text" placeholder="Email or phone number">
-                <input type="password" placeholder="Password">
-
-                <button type="submit" id="btnEntrar">Sign up</button>
+            <form action="" method="post">
+                <input type="text" name="fName" placeholder="Fisrt Name" require>
+                <input type="text" name="lName" placeholder="Last Name" require>
+                <input type="text" name="email" placeholder="Email or phone number" require>
+                <input type="password" name="pass" placeholder="Password" require>
+                <input type="password" name="conf_pass" placeholder="Confirm Password" require>
+                <button type="submit" name="SignUp" value="Sign up" id="btnEntrar">Sign up</button>
             </form>
-
             <div class="help">
-                <div>
-                    <input type="radio" id="me">
-                    <label for="me">Remember me</label>
-                </div>
-                    
                 <a href="">Need help?</a>
             </div>
 
@@ -69,6 +90,5 @@
             </div>
         </footer>
     </div>
-    <script src="./js/login.js"></script>
 </body>
 </html>

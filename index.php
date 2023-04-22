@@ -1,19 +1,34 @@
+<?php
+require_once "./php/connection.php";
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create']))
+{
+ $email = $_POST['email'];
+ $qry = "INSERT INTO `user_info` (`email`) VALUES(`$email`)";
+ $run = mysqli_query($con,$qry);
+ if($run==true)
+ ?> 
+ {
+           <script>
+            alert('Please Enter Further Details !!'); 
+            </script>
+ } 
+ <?php
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./assets/img/netflix-icon.jpg" type="image/x-icon">
     <link rel="stylesheet" href="./css/index.css">
-
     <title>Netflix-clone</title>
 </head>
 <body>
     <div class="container-main">
         <header>
-            <img src="./assets/img/logo.png" alt="Logo">
+            <a href="#"><img src="./assets/img/logo.png" alt="Logo"></a>
              <nav>
                 <ul>
                     <li>
@@ -23,9 +38,7 @@
                         </select>
                     </li>
                     <li>
-                        <a href="login.html">Login</a>
-                        <!-- <a href="signin.html">Signup</a> -->
-
+                        <a href="login.php">Login</a>
                     </li>
                 </ul>
             </nav>
@@ -40,10 +53,10 @@
             <h3>Ready to watch? Enter your email to create or restart your subscription.
             </h3>
 
-            <form>
-                <input type="text" placeholder="Email">
-                <button type="button" onclick="location.href='signin.html'">Create Account</button>
-            </form>
+           <form action="./signin.php" method="post">
+                <input type="text" name="email" placeholder="Email">
+                <button type="submit" name="create" value="create">Create Account</button>
+            </form> 
 
         </div>
     </div>
@@ -104,10 +117,11 @@
             
             <h3>Ready to watch? Enter your email to create or reset your subscription.</h3>
             
-            <form>
-                <input type="text" placeholder="Email">
-                <button type="button" onclick="location.href='signin.html'">Let's go</button>
-            </form>
+            <form action="./signin.php" method="post">
+                <input type="text" name="email" placeholder="Email">
+                <button type="submit" name="create" value="create">Create Account</button>
+            </form> 
+         
         </div>
     </section>
 
@@ -157,7 +171,5 @@
             
         </div>
     </footer>
-        
-</body>
-
+ </body>
 </html>

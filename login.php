@@ -1,6 +1,32 @@
+<?php
+require_once "./php/connection.php";
+if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['SignIn'])) 
+  {
+    $email = $_POST['email'];
+    $password = $_POST['pass'];
+    $pass = md5($password);
+    $qry = "SELECT * FROM `user_info` WHERE `email`='$email' AND `password`='$pass'";
+    $run = mysqli_query($con, $qry);
+    $row = mysqli_num_rows($run);
+    if ($row < 1)
+      {
+       ?> <script>
+            alert("Not a registered user !!");
+            window.open('signin.php', '_self');
+        </script>
+        <?php
+      }
+      else
+      {
+         ?> <script>
+             alert("Welcome User🙏");
+             window.open('home-user.php', '_self');
+         </script> <?php
+         }
+    }
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,18 +40,16 @@
 <body>
     <div class="container">
         <header>
-            <img src="./assets/img/logo.png" alt="Logo">
+           <a href="./index.php"><img src="./assets/img/logo.png" alt="Logo"></a>
         </header>
 
         <div class="container-login">
             <h1>To enter</h1>
 
-            <form action="">
-
-                <input type="text" placeholder="Email or phone number">
-                <input type="password" placeholder="Password">
-
-                <button type="submit" id="btnEntrar">Sign up</button>
+            <form action="" method="post">
+                <input type="text" name="email" placeholder="Email">
+                <input type="password" name="pass" placeholder="Password">
+                <button type="submit" name="SignIn" value="Sign in" id="btnEntrar">Sign up</button>
             </form>
 
             <div class="help">
@@ -67,6 +91,5 @@
             </div>
         </footer>
     </div>
-    <script src="./js/login.js"></script>
 </body>
 </html>

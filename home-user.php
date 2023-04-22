@@ -15,8 +15,7 @@
 
 <body>
     <header>
-        <img src="./assets/img/logo.png">
-
+       <a href="./index.php"><img src="./assets/img/logo.png"></a>
         <nav>
             <ul class="menu-nav">
                 <li>

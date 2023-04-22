@@ -5,8 +5,9 @@ $dbuser = "root";
 $dbpass = "";
 $dbname = "netflix";
 
-if(!$con = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname))
+$con = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
+if($con==false)
 {
-
-	die("failed to connect!");
+    echo "Database is not Connected!";
 }
+?>
